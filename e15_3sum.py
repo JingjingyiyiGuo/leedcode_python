@@ -29,6 +29,7 @@
 #                                     result.append(result_temp)
 #         return result
 
+# 这个方法提交通过了，但是效率比较低
 class Solution:
     def threeSum(self, nums):
         dict_num = {}
@@ -42,8 +43,15 @@ class Solution:
             new_tar = 0 - nums[i]
             for j in range(i+1, len(nums)):
                 tar = new_tar - nums[j]
-                if tar == nums[j]:
+                if tar == nums[j] and tar != nums[i]:
                     if len(dict_num[nums[j]]) > 1 :
+                        result_temp = sorted([nums[i],nums[j],tar])
+                        if result_temp in result:
+                            pass
+                        else:
+                            result.append(result_temp)
+                elif tar == nums[j] and tar == nums[i]:
+                    if len(dict_num[nums[j]]) > 2 :
                         result_temp = sorted([nums[i],nums[j],tar])
                         if result_temp in result:
                             pass
