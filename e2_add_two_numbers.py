@@ -53,55 +53,78 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
+        l1_head = ListNode(None)
+        l1_head.next = l1
+        l2_head = ListNode(None)
+        l2_head.next = l2
         l3 = ListNode(None)
         rem = 0
         l3_rem = l3
-        l1_rem = l1
-        l2_rem = l2
+        l1_rem = l1_head
+        l2_rem = l2_head
         while l1_rem.next != None and l2_rem.next != None:
             sum = l1_rem.next.val + l2_rem.next.val + rem
             if sum >= 10:
-                rem = 1
-                sum = sum - 10
+                rem = sum // 10
+                sum = sum % 10
             else:
                 rem = 0
             l3_rem.next = ListNode(sum)
             l1_rem = l1_rem.next
             l2_rem = l2_rem.next
             l3_rem = l3_rem.next
-        if l1_rem.next != None:
-            l3_rem.next = l1_rem.next
-        if l2_rem.next != None:
-            l3_rem.next = l2_rem.next
+        while l1_rem.next != None or l2_rem.next != None:
+            if l1_rem.next != None:
+                sum = l1_rem.next.val + rem
+                if sum >= 10:
+                    rem = sum // 10
+                    sum = sum % 10
+                else:
+                    rem = 0
+                l3_rem.next = ListNode(sum)
+                l3_rem = l3_rem.next
+                l1_rem = l1_rem.next
+            if l2_rem.next != None:
+                sum = l2_rem.next.val + rem
+                if sum >= 10:
+                    rem = sum // 10
+                    sum = sum % 10
+                else:
+                    rem = 0
+                l3_rem.next = ListNode(sum)
+                l3_rem = l3_rem.next
+                l2_rem = l2_rem.next
+        if rem != 0:
+            l3_rem.next = ListNode(rem)
         return l3.next
 
 
 
-l1 = ListNode(None)
-newnode = ListNode(2)
-l1.next = newnode
-newnode1 = ListNode(4)
-newnode.next = newnode1
-newnode2 = ListNode(3)
-newnode1.next = newnode2
-print(l1.next.val)
-print(l1.next.next.val)
-print(l1.next.next.next.val)
+l1 = ListNode(0)
+# newnode = ListNode(4)
+# l1.next = newnode
+# newnode1 = ListNode(3)
+# newnode.next = newnode1
+# print(l1.val)
+# print(l1.next.val)
+# print(l1.next.next.val)
+# print(l1.next.next.next.val)
 
-l2 = ListNode(None)
-newnode3 = ListNode(5)
+l2 = ListNode(7)
+newnode3 = ListNode(3)
 l2.next = newnode3
-newnode4 = ListNode(6)
-newnode3.next = newnode4
-newnode5 = ListNode(4)
-newnode4.next = newnode5
-print(l2.next.val)
-print(l2.next.next.val)
-print(l2.next.next.next.val)
+# newnode4 = ListNode(6)
+# newnode3.next = newnode4
+# print(l2.val)
+# print(l2.next.val)
+# print(l2.next.next.val)
+# print(l2.next.next.next.val)
 
 L = Solution()
 l3 = L.addTwoNumbers(l1,l2)
 print(l3.val)
 print(l3.next.val)
-print(l3.next.next.val)
+# print(l3.next.next.val)
+# print(l3.next.next.next.val)
+
 

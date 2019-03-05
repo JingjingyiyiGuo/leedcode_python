@@ -1,4 +1,4 @@
-# 
+# 算法思路：比较两个列表的第一位，删除较小的那个数；比较列表的最后一位，删除较大的那个数。在最终剩下的数里寻找中位数。
 class Solution:
     def findMedianSortedArrays(self, nums1, nums2) -> float:
         while True:
